@@ -1,0 +1,121 @@
+<div class="filterForm">
+  <button mat-flat-button class="btnRefreshClass" (click)="refreshData()">Refresh</button>
+
+  <button mat-flat-button class="btnGainerClass" (click)="getDataForGainer()">Show Gainer</button>
+
+  <button mat-flat-button class="btnLoserClass" (click)="getDataForLosers()">Show Losers</button>
+
+
+  <h4 [ngClass]="{
+  'btnGainerClass' : selectedList == 'G',
+'btnLoserClass' : selectedList == 'L'}">
+    List of Top {{selectedList == "G" ? "Gainer" : "Loser"}}
+  </h4>
+
+  <h5>
+    Last Refreshed on {{refreshDateTime}}
+  </h5>
+  <h5>
+    Next Refreshed on {{nextRefresh}}
+  </h5>
+  <div style="display: flex; gap: 20px; align-items: center;">
+
+    <mat-form-field class="example-form-field">
+      <mat-label>Clearable input</mat-label>
+      <input matInput type="text" [(ngModel)]="timeInterval" (ngModelChange)="scheduleNextExecution()">
+
+      <ng-container *ngIf="timeInterval">
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="timeInterval <= 0">
+          <mat-icon>close</mat-icon>
+        </button>
+      </ng-container>
+    </mat-form-field>
+
+    <mat-form-field class="example-form-field">
+      <mat-label>Clearable input</mat-label>
+      <input matInput type="text" [(ngModel)]="formData.StockName" (ngModelChange)="filterData()">
+
+      <ng-container *ngIf="formData.StockName">
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="formData.StockName=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </ng-container>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Minimum Value</mat-label>
+      <input matInput type="number" [(ngModel)]="formData.ChangeInPerFrom" (ngModelChange)="filterData()" [min]="0"
+        [max]="formData.ChangeInPerTo" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Maximum Value</mat-label>
+      <input matInput type="number" [(ngModel)]="formData.ChangeInPerTo" (ngModelChange)="filterData()"
+        [min]="formData.ChangeInPerFrom" [max]="100" />
+    </mat-form-field>
+  </div>
+</div>
+
+<ng-container *ngIf="dataSource">
+  <table mat-table [dataSource]="dataSource" class="tblClass">
+    <!-- Position Column -->
+    <ng-container matColumnDef="exch">
+      <th mat-header-cell *matHeaderCellDef> Exchanges </th>
+      <td mat-cell *matCellDef="let element"> {{element.Exch}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="sym">
+      <th mat-header-cell *matHeaderCellDef> Stock Code </th>
+      <td mat-cell *matCellDef="let element"> {{element.Sym}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="disp">
+      <th mat-header-cell *matHeaderCellDef> Dislay Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.DispSym}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ltp">
+      <th mat-header-cell *matHeaderCellDef> LTP </th>
+      <td mat-cell *matCellDef="let element"> {{element.Ltp}}{{' --- '}} {{element.intradayQty | number:'1.2-2'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="sl">
+      <th mat-header-cell *matHeaderCellDef> StopLoss </th>
+      <td mat-cell *matCellDef="let element"> {{element.StopLoss| number:'1.2-2'}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="chng">
+      <th mat-header-cell *matHeaderCellDef> Change in points </th>
+      <td mat-cell *matCellDef="let element"> {{element.Pchange}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="pchng">
+      <th mat-header-cell *matHeaderCellDef> Change in % </th>
+      <td mat-cell *matCellDef="let element"> {{element.PPerchange | number:'1.2-2'}}% </td>
+    </ng-container>
+
+    <ng-container matColumnDef="openHigh">
+      <th mat-header-cell *matHeaderCellDef> Open High </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.openHigh }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="openLow">
+      <th mat-header-cell *matHeaderCellDef> Open Low </th>
+      <td mat-cell *matCellDef="let element"> {{element.openLow }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastHigh">
+      <th mat-header-cell *matHeaderCellDef> Last High </th>
+      <td mat-cell *matCellDef="let element"> {{element.lastHigh }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastLow">
+      <th mat-header-cell *matHeaderCellDef> Last Low </th>
+      <td mat-cell *matCellDef="let element"> {{element.lastLow}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</ng-container>

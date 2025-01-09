@@ -1,0 +1,7 @@
+{
+    "/api": {
+        "target":"https://ticks.dhan.co",
+        "secure":false,
+        "logLevel":"debug"
+    }
+}

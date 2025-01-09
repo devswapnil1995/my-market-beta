@@ -1,0 +1,53 @@
+.btnRefreshClass {
+    color: white;
+    background-color: rgb(67, 67, 186);
+    margin-right: 5px;
+}
+
+.btnGainerClass {
+    color: white;
+    background-color: rgb(54, 169, 54);
+    margin-right: 5px;
+}
+
+.btnLoserClass {
+    color: white;
+    background-color: rgb(220, 52, 52);
+    margin-right: 5px;
+}
+
+.tblClass {
+    width: 100%;
+}
+
+.example-form-field {
+    width: 200px;
+    display: flex !important;
+}
+
+.filterForm {
+    width: 100%;
+    margin: 5px 10px 5px 15px;
+}
+
+.bgGreen {
+    background-color: rgb(48, 230, 48);
+}
+
+.bgRed {
+    background-color: rgb(235, 102, 102);
+}
+
+::ng-deep .mat-checkbox-checked .mat-checkbox-background {
+    background-color: var(--checkbox-bg-color, black) !important;
+}
+
+::ng-deep .dynamic-checkbox.mat-checkbox-indeterminate .mat-checkbox-background {
+    background-color: white !important;
+    /* Indeterminate state background */
+}
+
+::ng-deep .dynamic-checkbox.mat-checkbox-frame {
+    border-color: purple !important;
+    /* Checkbox border */
+}
