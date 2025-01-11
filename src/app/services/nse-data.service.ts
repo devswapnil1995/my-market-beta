@@ -40,78 +40,7 @@ export class NseDataService {
     });
 
     let data = {
-      "data": {
-        "sort": "PPerchange",
-        "sorder": "desc",
-        "count": 50,
-        "params": [
-          {
-            "field": "Exch",
-            "op": "",
-            "val": "NSE"
-          },
-          {
-            "field": "idxlist.Indexid",
-            "op": "",
-            "val": "19,13,25"
-          },
-          {
-            "field": "PPerchange",
-            "op": "RANGE",
-            "val": "2_38.74"
-          },
-          {
-            "field": "OgInst",
-            "op": "",
-            "val": "ES"
-          },
-          {
-            "field": "OgInst",
-            "op": "",
-            "val": "ES"
-          },
-          {
-            "field": "OgInst",
-            "op": "",
-            "val": "ES"
-          },
-          {
-            "field": "OgInst",
-            "op": "",
-            "val": "ES"
-          },
-          {
-            "field": "OgInst",
-            "op": "",
-            "val": "ES"
-          },
-          {
-            "field": "OgInst",
-            "op": "",
-            "val": "ES"
-          },
-          {
-            "field": "Volume",
-            "op": "gte",
-            "val": "0"
-          }
-        ],
-        "fields": [
-          "DispSym",
-          "Ltp",
-          "Pchange",
-          "PPerchange",
-          "Volume",
-          "Pe",
-          "Mcap",
-          "PricePerchng1week",
-          "YearlyRevenue",
-          "FIIHolding",
-          "Min15EMA10CurrentCandle",
-          "Sym"
-        ],
-        "pgno": 1
-      }
+      data: scannerModel
     }
     return this.http.post("https://scanx-analytics.dhan.co/customscan/fetchdt", JSON.stringify(data), { headers });
   }

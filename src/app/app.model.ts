@@ -142,3 +142,19 @@ export interface Daum {
     lastLow: number; //Last candle close low
     StopLoss: number;
 }
+
+
+export interface GridList {
+    StockId: number;
+    StockName: string;
+    DisplayName: string;
+    LTP: number;
+    ChangeInPoint: number;
+    ChangeInPer: number;
+    StopLoss: number;
+    IntradayQry: number;
+    OpenHigh: number; //1st candle close high
+    OpenLow: number; //1st candle close low
+    LastHigh: number; //Last candle close high
+    LastLow: number; //Last candle close low
+}
